@@ -85,3 +85,7 @@ su -c 'fusermount --version'
 ## Author
 
 **faa_ramadhan**
+
+## License
+
+[MIT](LICENSE)
