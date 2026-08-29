@@ -20,24 +20,20 @@ cd Magisk-Rclone
 
 ### 2. Buat zip dari source
 
-**Linux / macOS:**
+**Cara paling mudah (universal, semua OS):**
 ```bash
-zip -r rclone-v1.75.0-fusermount-arm64.zip . -x ".git/*" ".gitignore" "README.md"
+python zip.py
 ```
 
-**Windows (Python):**
+Script ini otomatis:
+- Membuat file zip `rclone-v1.75.0-fusermount-arm64.zip`
+- Melewati `.git`, `.gitignore`, `README.md`, `LICENSE`, `zip.py`
+
+Mau nama file beda? Tinggal ketik pas diminta.
+
+**Cara manual (Linux/macOS):**
 ```bash
-python -c "
-import zipfile, os
-root = os.getcwd()
-exclude = {'.git', '.gitignore', 'README.md', 'rclone-v1.75.0-fusermount-arm64.zip'}
-with zipfile.ZipFile('rclone-v1.75.0-fusermount-arm64.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
-    for dirpath, dirs, files in os.walk(root):
-        dirs[:] = [d for d in dirs if d not in exclude]
-        for f in files:
-            if f in exclude or f.endswith('.zip'): continue
-            zf.write(os.path.join(dirpath, f), os.path.relpath(os.path.join(dirpath, f), root).replace(os.sep, '/'))
-"
+zip -r rclone-v1.75.0-fusermount-arm64.zip . -x ".git/*" ".gitignore" "README.md" "LICENSE" "zip.py"
 ```
 
 > **PENTING:** Jangan pakai `Compress-Archive` (PowerShell) karena path-nya pake backslash, Magisk tidak bisa extract dengan benar.
